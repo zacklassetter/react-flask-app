@@ -4,17 +4,10 @@ import './App.css';
 import axios from 'axios';
 
 function App() {
-  const [currentTime, setCurrentTime] = useState(0);
   const [name, setName] = useState("");
   const [zip, setZip] = useState("");
   const [phrase, setPhrase] = useState("");
 
-
-  useEffect(() => {
-    fetch('/time').then(res => res.json()).then(data => {
-      setCurrentTime(data.time);
-    });
-  }, []);
 
 
   const json = JSON.stringify({
@@ -22,7 +15,7 @@ function App() {
     zip: zip
   });
   useEffect(() => {
-    axios.post('/create_phrase', json, {
+    axios.post('https://zero-flask.herokuapp.com//create_phrase', json, {
       headers: {
         'Content-Type': 'application/json'
       }
