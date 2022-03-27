@@ -1,4 +1,4 @@
-import time
+from flask_cors import CORS
 from flask import Flask
 from flask import request
 import sqlite3
@@ -34,6 +34,7 @@ def selectZip(zip):
 
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/create_phrase', methods=['POST'])
