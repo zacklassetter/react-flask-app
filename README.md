@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# This application is hosted on heroku 
+- The front end is hosted at https://zero-react.herokuapp.com/
+- The backend is hosted at https://zero-flask.herokuapp.com/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# To start the app locally
+Navigate to the root directory of the project and type:
 
-## Available Scripts
+```
+cd api
+venv\Scripts\activate
+cd ..
+npm run start-api
+```
+This will start the backend of the project
 
-In the project directory, you can run:
+To start the frontend, first open a new terminal window, navigate to the project and type
+```
+npm install 
+```
+This will install the project dependencies.
+Next type:
+```
+npm start
+```
 
-### `npm start`
+The entire project now should be running locally
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Approach 
+For the underlying data I found data in the form of a csv file from https://simplemaps.com/data/us-zips.
+I then created a Sqlite database, created a corresponding schema, and then imported the csv file into my database.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+To manage the first phrase, I created a single '\create_phrase' endpoint in the flask backend. It takes two parameters: a name and a zipcode. It then queries the database I created to find the corresponding county and population.
 
-### `npm test`
+The additional feature that I implemented was another api endpoint '/county_pop', that takes a zipcode as a parameter. This then makes a more complicated query on my database which sums up the population of all of the zipcodes within the county of the given zipcode.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+On the react side, I created four state variables, name, zip, phrase, and county_phrase. These store the entered name, entered zip code, phrase returned from my first endpoint, and data returned from my second endpoint respectively. I then used the useEffect hook to make get requests to my backend when the relevent state variables were updated.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

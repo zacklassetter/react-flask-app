@@ -19,14 +19,9 @@ function App() {
 
   //Every time the name or zipcode is updated, retrieve the new phrase and update the state
   useEffect(() => {
-    axios.post('https://zero-flask.herokuapp.com/create_phrase', json, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    axios.get('/create_phrase', { params: { name: name, zip: zip } })
     .then(res => setPhrase(res.data.phrase))
     .catch(error => {
-      // handle error
       console.log(error);
     });
   }, [name, zip]);
@@ -40,14 +35,9 @@ function App() {
   //Every Time the zipcode is updated, retrieve information about the total population of the county
   //of the given zipcode
   useEffect(() => {
-    axios.post('https://zero-flask.herokuapp.com/county_pop', zipJson, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    axios.get('/county_pop', { params: { zip: zip } })
     .then(res => setCountyPhrase(res.data.phrase))
     .catch(error => {
-      // handle error
       console.log(error);
     });
   }, [zip]);
