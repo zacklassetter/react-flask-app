@@ -19,7 +19,7 @@ function App() {
 
   //Every time the name or zipcode is updated, retrieve the new phrase and update the state
   useEffect(() => {
-    axios.post('/create_phrase', json, {
+    axios.post('https://zero-flask.herokuapp.com/create_phrase', json, {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -40,7 +40,7 @@ function App() {
   //Every Time the zipcode is updated, retrieve information about the total population of the county
   //of the given zipcode
   useEffect(() => {
-    axios.post('/county_pop', zipJson, {
+    axios.post('https://zero-flask.herokuapp.com/county_pop', zipJson, {
       headers: {
         'Content-Type': 'application/json'
       }
